@@ -70,6 +70,7 @@ crontab -u root -e
 ### 1.4.1 Ensure permissions on bootloader config are configured
 
 chown root:root /boot/grub2/grub.cfg
+
 chmod og-rwx /boot/grub2/grub.cfg
 
 ### 1.5.1 Ensure core dumps are restricted
@@ -83,101 +84,145 @@ sysctl -w fs.suid_dumpable=0
 ### 1.5.2 Ensure address space layout randomization (ASLR) is enabled
 
 echo "kernel.randomize_va_space = 2 " | sudo tee -a /etc/sysctl.conf
+
 sysctl -w kernel.randomize_va_space=2
 
 ### 3.1.1 Ensure IP forwarding is disabled
 
 echo "net.ipv4.ip_forward = 0" | sudo tee -a /etc/sysctl.conf
+
 sysctl -w net.ipv4.ip_forward=0
+
 sysctl -w net.ipv4.route.flush=1
 
 ### 3.1.2 Ensure packet redirect sending is disabled
 
 echo "net.ipv4.conf.all.send_redirects = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv4.conf.default.send_redirects = 0" | sudo tee -a /etc/sysctl.conf
 
 sysctl -w net.ipv4.conf.all.send_redirects=0
+
 sysctl -w net.ipv4.conf.default.send_redirects=0
+
 sysctl -w net.ipv4.route.flush=1
 
 ### 3.2.1 Ensure source routed packets are not accepted
 
 echo "net.ipv4.conf.all.accept_source_route = 0"| sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv4.conf.default.accept_source_route = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv6.conf.all.accept_source_route = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv6.conf.default.accept_source_route = 0" | sudo tee -a /etc/sysctl.conf
 
 sysctl -w net.ipv4.conf.all.accept_source_route=0
+
 sysctl -w net.ipv4.conf.default.accept_source_route=0
+
 sysctl -w net.ipv6.conf.all.accept_source_route=0
+
 sysctl -w net.ipv6.conf.default.accept_source_route=0
 
 sysctl -w net.ipv4.route.flush=1
+
 sysctl -w net.ipv6.route.flush=1
 
 ### 3.2.2 Ensure ICMP redirects are not accepted
 
 echo "net.ipv4.conf.all.accept_redirects = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv4.conf.default.accept_redirects = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv6.conf.all.accept_redirects = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv6.conf.default.accept_redirects = 0" | sudo tee -a /etc/sysctl.conf
 
 sysctl -w net.ipv4.conf.all.accept_redirects=0
- sysctl -w net.ipv4.conf.default.accept_redirects=0
+
+sysctl -w net.ipv4.conf.default.accept_redirects=0
+
 sysctl -w net.ipv6.conf.all.accept_redirects=0
+
 sysctl -w net.ipv6.conf.default.accept_redirects=0
+
 sysctl -w net.ipv4.route.flush=1
- sysctl -w net.ipv6.route.flush=1
+
+sysctl -w net.ipv6.route.flush=1
 
 ### 3.2.3 Ensure secure ICMP redirects are not accepted
 
 echo "net.ipv4.conf.all.secure_redirects = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv4.conf.default.secure_redirects = 0" | sudo tee -a /etc/sysctl.conf
+
 sysctl -w net.ipv4.conf.all.secure_redirects=0
+
 sysctl -w net.ipv4.conf.default.secure_redirects=0
- sysctl -w net.ipv4.route.flush=1
+
+sysctl -w net.ipv4.route.flush=1
 
 ### 3.2.4 Ensure suspicious packets are logged
 
 echo "net.ipv4.conf.all.log_martians = 1" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv4.conf.default.log_martians = 1" | sudo tee -a /etc/sysctl.conf
 
- sysctl -w net.ipv4.conf.all.log_martians=1
- sysctl -w net.ipv4.conf.default.log_martians=1
+sysctl -w net.ipv4.conf.all.log_martians=1
+
+sysctl -w net.ipv4.conf.default.log_martians=1
+
 sysctl -w net.ipv4.route.flush=1
 
 ### 3.2.5 Ensure broadcast ICMP requests are ignored
+
 echo "net.ipv4.icmp_echo_ignore_broadcasts = 1" | sudo tee -a /etc/sysctl.conf
+
 sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1
+
 sysctl -w net.ipv4.route.flush=1
 
 ### 3.2.6 Ensure bogus ICMP responses are ignored
+
 echo "net.ipv4.icmp_ignore_bogus_error_responses = 1" | sudo tee -a /etc/sysctl.conf
+
 sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
+
 sysctl -w net.ipv4.route.flush=1
 
 
 ### 3.2.7 Ensure Reverse Path Filtering is enabled
 
 echo "net.ipv4.conf.all.rp_filter = 1" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv4.conf.default.rp_filter = 1" | sudo tee -a /etc/sysctl.conf
- sysctl -w net.ipv4.conf.all.rp_filter=1
+
+sysctl -w net.ipv4.conf.all.rp_filter=1
+
 sysctl -w net.ipv4.conf.default.rp_filter=1
- sysctl -w net.ipv4.route.flush=1
+
+sysctl -w net.ipv4.route.flush=1
 
 
 ### 3.2.8 Ensure TCP SYN Cookies is enabled
 
 echo "net.ipv4.tcp_syncookies = 1" | sudo tee -a /etc/sysctl.conf
+
 sysctl -w net.ipv4.tcp_syncookies=1
+
 sysctl -w net.ipv4.route.flush=1
 
 ### 3.2.9 Ensure IPv6 router advertisements are not accepted
+
 echo "net.ipv6.conf.all.accept_ra = 0" | sudo tee -a /etc/sysctl.conf
+
 echo "net.ipv6.conf.default.accept_ra = 0" | sudo tee -a /etc/sysctl.conf
 
 sysctl -w net.ipv6.conf.all.accept_ra=0
- sysctl -w net.ipv6.conf.default.accept_ra=0
+
+sysctl -w net.ipv6.conf.default.accept_ra=0
+
 sysctl -w net.ipv6.route.flush=1
 
 ### 3.4.1 Ensure DCCP is disabled
@@ -212,46 +257,62 @@ echo "*.* @@loghost.example.com" | sudo tee -a /etc/rsyslog.conf
 Add the following line to the /etc/pam.d/su file: auth required pam_wheel.so use_uid
 
 Create a comma separated list of users in the wheel statement in the /etc/group file:
+
 wheel:x:10:root,<user list>
 
 ### 5.1.2 Ensure permissions on /etc/crontab are configured
 
 chown root:root /etc/crontab
+
 chmod og-rwx /etc/crontab
 
 ### 5.1.3 Ensure permissions on /etc/cron.hourly are configured
 
 chown root:root /etc/cron.hourly
- chmod og-rwx /etc/cron.hourly
+
+chmod og-rwx /etc/cron.hourly
 
 ###  5.1.4 Ensure permissions on /etc/cron.daily are configured
 
 chown root:root /etc/cron.daily
+
 chmod og-rwx /etc/cron.daily
 
 ### 5.1.5 Ensure permissions on /etc/cron.weekly are configured
 
 chown root:root /etc/cron.weekly
+
 chmod og-rwx /etc/cron.weekly
 
 ### 5.1.6 Ensure permissions on /etc/cron.monthly are configured
+
 chown root:root /etc/cron.monthly
- chmod og-rwx /etc/cron.monthly
+
+chmod og-rwx /etc/cron.monthly
 
 
 ### 5.1.7 Ensure permissions on /etc/cron.d are configured
 
 chown root:root /etc/cron.d
+
 chmod og-rwx /etc/cron.d
 
 ### 5.1.8 Ensure at/cron is restricted to authorized users
+
  rm /etc/cron.deny
+
 rm /etc/at.deny
+
 touch /etc/cron.allow
+
 touch /etc/at.allow
- chmod og-rwx /etc/cron.allow
+
+chmod og-rwx /etc/cron.allow
+
 chmod og-rwx /etc/at.allow
+
 chown root:root /etc/cron.allow
+
 chown root:root /etc/at.allow
 
 ### 5.2.4 Ensure SSH Protocol is set to 2
