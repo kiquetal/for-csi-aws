@@ -1,22 +1,30 @@
 ### 1.1.2 Ensure /tmp is configured (Scored)
 
 systemctl unmask tmp.mount
+
 systemctl enable tmp.mount
 
 on /etc/fstab
+
 tmpfs /tmp tmpfs defaults,rw,nosuid,nodev,noexec,relatime 0 0
 
 on /etc/systemd/system/local-fs.target.wants/tmp.mount
+
 [Mount]
+
 What=tmpfs
+
 Where=/tmp
+
 Type=tmpfs
+
 Options=mode=1777,strictatime,noexec,nodev,nosuid
 
 
 ### 1.1.17 Ensure noexec option set on /dev/shm partition
 
 on etc/fstab
+
 tmpfs /dev/shm tmpfs defaults,nodev,nosuid,noexec 0 0
 
 ### 1.1.1.1 Ensure mounting of cramfs filesystems is disabled
@@ -325,4 +333,4 @@ auth required pam_faillock.so preauth audit silent deny=5 unlock_time=900
 auth [success=1 default=bad] pam_unix.so
 auth [default=die] pam_faillock.so authfail audit deny=5 unlock_time=900
 auth sufficient pam_faillock.so authsucc audit deny=5 unlock_time=900
-~                                                                        
+                                                                        
