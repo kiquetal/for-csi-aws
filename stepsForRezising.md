@@ -14,7 +14,7 @@
 	fsidk /dev/xvdg
 	g= gpt table must be this
 	n= new partition
-	t= change
+	t= change the typpe (must be BIOS boot)
 
 
 
