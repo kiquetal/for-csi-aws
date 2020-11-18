@@ -31,7 +31,7 @@
 	mount --bind /proc proc
 	mount --bind /sys sys
 	chroot .
-	[root@centos /]# grub2-install /dev/xvdg
+	[root@centos /]# grub2-install /dev/xvdg   #must be in the block,no PARTITION!!
 
 
 
