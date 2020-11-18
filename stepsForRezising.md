@@ -1,7 +1,8 @@
 #####
 
 
- 	To make a root volume for EBS, you need to replicate the following GPT
+ 	To make a booteablet volume for EBS, you need to replicate the following GPT
+
 	
 	
 	Device       Start      End Sectors Size Type
@@ -21,10 +22,15 @@
 	format the new partition
 
 
-	mount to a directory mount /dev/xvdg2 /mnt/myroot/root
+	mount to a directory mount /dev/xvdg2 /mnt/myroot/root 
+	
+	you can now copy from another volume to /mnt/mroot/root/
 
+        rsync -av /mnt/amiroot/home/    /mnt/myroot/home/
+	rsync -av --exclude=home /mnt/amiroot/   /mnt/myroot/root/
+ 
 
-        To install grub2-install you must be inside the root with access to boot
+        To install grub2-install you must be inside the root(/mnt/myroot/root) with access to boot
 
  
 	mount --bind /dev dev
